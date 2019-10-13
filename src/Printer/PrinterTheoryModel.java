@@ -6,10 +6,12 @@ import java.util.concurrent.TimeUnit;
 public class PrinterTheoryModel {
     static boolean paperCharged = false; //наличие заправленной бумаги
     static boolean readyToPrint = true; //возможность начать процесс печати
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
+        paperCharge();
+        print();
     }
 
-    public static void paperCharge(String[] args) {
+    public static void paperCharge() {
         if (paperCharged == true){
             System.out.println("Если бумага заправлена, то повторно заправляться не может");
         }
@@ -19,7 +21,7 @@ public class PrinterTheoryModel {
             System.out.println("Бумага успешно заправлена");
         }
     }
-    public static void print(String[] args) throws InterruptedException {
+    public static void print() throws InterruptedException {
         if (readyToPrint==false){
             System.out.println("Дождитесь завершения текущей операции печати");
         }
@@ -31,6 +33,7 @@ public class PrinterTheoryModel {
                     readyToPrint=false;
                     paperCharged=false;
                     //происходит печать
+                    System.out.println("Запущен процесс печати, время ожидания - 60с");
                     TimeUnit.SECONDS.sleep(60);
                     readyToPrint=true;
                     System.out.println("Печать успешно завершена");
