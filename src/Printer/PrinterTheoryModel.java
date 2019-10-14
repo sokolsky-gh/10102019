@@ -32,11 +32,10 @@ public class PrinterTheoryModel {
                 //происходит печать
                 System.out.println("Запущен процесс печати, время ожидания - 60с");
                 try {
-                    Thread.sleep(5000);
+                    Thread.sleep(60000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                //TimeUnit.SECONDS.sleep(60);
                 readyToPrint = true;
                 System.out.println("Печать успешно завершена");
             }
