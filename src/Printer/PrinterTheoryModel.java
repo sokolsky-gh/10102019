@@ -1,42 +1,44 @@
 package Printer;
 
 
-import java.util.concurrent.TimeUnit;
-
 public class PrinterTheoryModel {
     static boolean paperCharged = false; //наличие заправленной бумаги
     static boolean readyToPrint = true; //возможность начать процесс печати
-    public static void main(String[] args) throws InterruptedException {
+
+    public static void main(String[] args) {
         paperCharge();
         print();
     }
 
     public static void paperCharge() {
-        if (paperCharged == true){
+        if (paperCharged == true) {
             System.out.println("Если бумага заправлена, то повторно заправляться не может");
-        }
-        else {
-            paperCharged=true;
+        } else {
+            paperCharged = true;
             //бумага заправляется
             System.out.println("Бумага успешно заправлена");
         }
     }
-    public static void print() throws InterruptedException {
-        if (readyToPrint==false){
+
+    public static void print() {
+        if (readyToPrint == false) {
             System.out.println("Дождитесь завершения текущей операции печати");
-        }
-        else{
-            if (paperCharged==false) {
+        } else {
+            if (paperCharged == false) {
                 System.out.println("Печать без заправленной бумаги производиться не может");
-            }
-                else{
-                    readyToPrint=false;
-                    paperCharged=false;
-                    //происходит печать
-                    System.out.println("Запущен процесс печати, время ожидания - 60с");
-                    TimeUnit.SECONDS.sleep(60);
-                    readyToPrint=true;
-                    System.out.println("Печать успешно завершена");
+            } else {
+                readyToPrint = false;
+                paperCharged = false;
+                //происходит печать
+                System.out.println("Запущен процесс печати, время ожидания - 60с");
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                //TimeUnit.SECONDS.sleep(60);
+                readyToPrint = true;
+                System.out.println("Печать успешно завершена");
             }
         }
     }
